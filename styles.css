@@ -4,7 +4,10 @@
     height: 125px;
 }
 
+body {
+    background-size: 100%;
+}
+
 html {
-    background: cover;
     color: white;
 }
