@@ -3,13 +3,14 @@ const GOOGLEMAPS_APIKEY = 'AIzaSyAFAUXNpi2NLxkF0WgExSxlIyCuLk1PFJs';
 const UNIT = 'imperial';
 
 var backgrounds = {
-  thunderstorm: "http://fairerplatform.com/wp-content/uploads/2014/05/wallpoper_storm.jpg",
-  drizzle: "http://wallpoper.com/images/00/31/15/79/glass-raindrops_00311579.jpg",
+  "clear-day": "https://images.unsplash.com/photo-1467377791767-c929b5dc9a23",
+  "clear-night": "https://images.unsplash.com/photo-1444080748397-f442aa95c3e5",
   rain: "http://webneel.com/wallpaper/sites/default/files/images/04-2013/creative-rain_0.jpg",
   snow: "http://7-themes.com/data_images/out/71/7013393-snow-river-wallpaper.jpg",
-  clouds: "http://cdnfiles.hdrcreme.com/49001/original/cloudy-day.jpg",
-  mist: "http://www.zocalopublicsquare.org/wp-content/uploads/2010/05/mist.jpg",
-  "clear-day": "https://images.unsplash.com/photo-1467377791767-c929b5dc9a23"
+  thunderstorm: "http://fairerplatform.com/wp-content/uploads/2014/05/wallpoper_storm.jpg",
+  drizzle: "http://wallpoper.com/images/00/31/15/79/glass-raindrops_00311579.jpg",
+  cloudy: "http://cdnfiles.hdrcreme.com/49001/original/cloudy-day.jpg",
+  mist: "http://www.zocalopublicsquare.org/wp-content/uploads/2010/05/mist.jpg"
 };
 
 $(document).ready(function() {
