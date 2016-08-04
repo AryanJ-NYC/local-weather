@@ -5,6 +5,8 @@ const UNIT = 'imperial';
 var backgrounds = {
   "clear-day": "https://images.unsplash.com/photo-1467377791767-c929b5dc9a23",
   "clear-night": "https://images.unsplash.com/photo-1444080748397-f442aa95c3e5",
+  "partly-cloudy-day": "https://images.unsplash.com/photo-1450128910652-d698afa60ac8",
+  "partly-cloudy-night": "https://images.unsplash.com/photo-1469007348879-390c07d73c33",
   rain: "http://webneel.com/wallpaper/sites/default/files/images/04-2013/creative-rain_0.jpg",
   snow: "http://7-themes.com/data_images/out/71/7013393-snow-river-wallpaper.jpg",
   thunderstorm: "http://fairerplatform.com/wp-content/uploads/2014/05/wallpoper_storm.jpg",
@@ -34,6 +36,6 @@ $(document).ready(function() {
       $('#weather-description').text(response.currently.summary);
       $('#wind').text(`${response.currently.windSpeed} mph`);
       $('#temperature').append(Math.round(response.currently.temperature) + ' &deg;F');
-    }, "jsonp")
+    }, "jsonp");
   });
 });
