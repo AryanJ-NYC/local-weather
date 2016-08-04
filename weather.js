@@ -13,7 +13,6 @@ var backgrounds = {
 
 $(document).ready(function() {
   navigator.geolocation.getCurrentPosition(function (position) {
-    console.log(position);
     // $('#region-info').text(`${response.city}, ${response.region}`);
     const LATITUDE = position.coords.latitude;
     const LONGITUDE = position.coords.longitude;
@@ -21,13 +20,14 @@ $(document).ready(function() {
 
     $.get(DARKSKY_URL, function(response) {
       let icon = response.currently.icon;
-      $('#weather-description').text(response.currently.summary);
-      $('#wind').text(`${response.currently.windSpeed} mph`);
-      skycons.add("weather-icon", icon);
-      $('#temperature').append(Math.round(response.currently.temperature) + ' &deg;F');
-      
       let backgroundImageLink = backgrounds[icon];
       $('body').css('background-image', 'url("' + backgroundImageLink + '")');
+      skycons.add("weather-icon", icon);
+      skycons.play();
+      
+      $('#weather-description').text(response.currently.summary);
+      $('#wind').text(`${response.currently.windSpeed} mph`);
+      $('#temperature').append(Math.round(response.currently.temperature) + ' &deg;F');
     }, "jsonp")
   });
 });
