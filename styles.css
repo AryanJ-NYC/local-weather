@@ -1,0 +1,10 @@
+.weather-button {
+    padding: 30px;
+    border-radius: 10px;
+    height: 125px;
+}
+
+html {
+    background: cover;
+    color: white;
+}
