@@ -1,4 +1,4 @@
-const OPENWEATHER_APIKEY = '533576179dd64d9355eff2954198e13a';
+const DARKSKY_APIKEY = 'd8044f3e42338203b270b3e6f2d4f83b';
 const UNIT = 'imperial';
 
 var backgrounds = {
@@ -8,24 +8,25 @@ var backgrounds = {
   snow: "http://7-themes.com/data_images/out/71/7013393-snow-river-wallpaper.jpg",
   clouds: "http://cdnfiles.hdrcreme.com/49001/original/cloudy-day.jpg",
   mist: "http://www.zocalopublicsquare.org/wp-content/uploads/2010/05/mist.jpg",
-  clear: "https://images.unsplash.com/photo-1467377791767-c929b5dc9a23"
+  "clear-day": "https://images.unsplash.com/photo-1467377791767-c929b5dc9a23"
 };
 
 $(document).ready(function() {
-  $.getJSON("http://ipinfo.io", function(response) {
-    $('#region-info').text(`${response.city}, ${response.region}`);
-    let location = response.loc.split(',');
-    const LATITUDE = location[0];
-    const LONGITUDE = location[1];
-    const OPENWEATHER_URL = `http://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&units=${UNIT}&appid=${OPENWEATHER_APIKEY}`;
+  navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+    // $('#region-info').text(`${response.city}, ${response.region}`);
+    const LATITUDE = position.coords.latitude;
+    const LONGITUDE = position.coords.longitude;
+    const DARKSKY_URL = `https://api.forecast.io/forecast/${DARKSKY_APIKEY}/${LATITUDE},${LONGITUDE}`;
 
-    $.get(OPENWEATHER_URL, function(response) {
-      $('#weather-description').text(response.weather[0].description);
-      $('#wind').text(`${response.wind.speed} mph`);
-      $('#weather-icon').attr('src', `http://openweathermap.org/img/w/${response.weather[0].icon}.png`);
-      $('#temperature').append(Math.round(response.main.temp) + ' &deg;F');
-      let weather = response.weather[0].main.toLowerCase();
-      let backgroundImageLink = backgrounds[weather];
+    $.get(DARKSKY_URL, function(response) {
+      let icon = response.currently.icon;
+      $('#weather-description').text(response.currently.summary);
+      $('#wind').text(`${response.currently.windSpeed} mph`);
+      skycons.add("weather-icon", icon);
+      $('#temperature').append(Math.round(response.currently.temperature) + ' &deg;F');
+      
+      let backgroundImageLink = backgrounds[icon];
       $('body').css('background-image', 'url("' + backgroundImageLink + '")');
     }, "jsonp")
   });
