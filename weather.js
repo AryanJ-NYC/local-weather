@@ -1,4 +1,5 @@
 const DARKSKY_APIKEY = 'd8044f3e42338203b270b3e6f2d4f83b';
+const GOOGLEMAPS_APIKEY = 'AIzaSyAFAUXNpi2NLxkF0WgExSxlIyCuLk1PFJs';
 const UNIT = 'imperial';
 
 var backgrounds = {
@@ -13,11 +14,15 @@ var backgrounds = {
 
 $(document).ready(function() {
   navigator.geolocation.getCurrentPosition(function (position) {
-    // $('#region-info').text(`${response.city}, ${response.region}`);
     const LATITUDE = position.coords.latitude;
     const LONGITUDE = position.coords.longitude;
-    const DARKSKY_URL = `https://api.forecast.io/forecast/${DARKSKY_APIKEY}/${LATITUDE},${LONGITUDE}`;
+    $.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${LATITUDE},${LONGITUDE}&key=${GOOGLEMAPS_APIKEY}`, function(addresses) {
+      let city = addresses.results[0].address_components[3].long_name;
+      let state_abbr = addresses.results[0].address_components[6].short_name;
+      $('#region-info').text(`${city}, ${state_abbr}`);
+    });
 
+    const DARKSKY_URL = `https://api.forecast.io/forecast/${DARKSKY_APIKEY}/${LATITUDE},${LONGITUDE}`;
     $.get(DARKSKY_URL, function(response) {
       let icon = response.currently.icon;
       let backgroundImageLink = backgrounds[icon];
